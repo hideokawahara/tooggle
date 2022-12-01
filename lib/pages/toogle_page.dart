@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
+//Resources
+import 'package:tooggle/resources/app_colors.dart';
+
 class TogglePage extends StatelessWidget {
   const TogglePage({Key? key}) : super(key: key);
 
@@ -10,7 +13,8 @@ class TogglePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Toggler'),
+        backgroundColor: AppColors.mainAppColor,
+        title: const Text('ToogGle'),
       ),
       body: const TogglePageBody(),
     );
