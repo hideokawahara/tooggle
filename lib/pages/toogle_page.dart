@@ -163,6 +163,9 @@ class _TogglePageBodyState extends State<TogglePageBody> {
                         controller: controller,
                         decoration: InputDecoration(
                           hintText: 'メッセージを入力使用',
+                          hintStyle: const TextStyle(
+                            fontSize: 12,
+                          ),
                           fillColor: convertToToggleColorValue(selectColor)
                               .withOpacity(
                             0.3,
