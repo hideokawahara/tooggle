@@ -105,6 +105,7 @@ class _TogglePageBodyState extends State<TogglePageBody> {
                   value: toggleSize,
                   min: 100,
                   max: 300,
+                  activeColor: convertToToggleColorValue(selectColor),
                   onChanged: (double value) {
                     setState(() {
                       toggleSize = value;
@@ -168,7 +169,6 @@ class _TogglePageBodyState extends State<TogglePageBody> {
                           ),
                           filled: true,
                           isDense: true,
-                          prefixIcon: const Icon(Icons.keyboard),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(32),
                             borderSide: BorderSide.none,
@@ -253,7 +253,7 @@ class _TogglePageBodyState extends State<TogglePageBody> {
       }
       return FloatingActionButton(
         heroTag: buttonTitle,
-        backgroundColor: isSelect == select ? Colors.grey : null,
+        backgroundColor: isSelect == select ? Colors.grey : convertToToggleColorValue(selectColor),
         child: Text(buttonTitle),
         onPressed: () {
           setState(() {
@@ -283,7 +283,7 @@ class _TogglePageBodyState extends State<TogglePageBody> {
       }
       return FloatingActionButton(
         heroTag: buttonTitle,
-        backgroundColor: selectColor == color ? Colors.grey : null,
+        backgroundColor: selectColor == color ? Colors.grey : convertToToggleColorValue(selectColor),
         child: Text(buttonTitle),
         onPressed: () {
           setState(() {
