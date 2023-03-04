@@ -23,15 +23,15 @@ class TogglePage extends StatelessWidget {
         backgroundColor: AppColors.mainAppColor,
         title: const Text('ToogGle'),
       ),
-      body: const TogglePageBody(),
+      body: TogglePageBody(),
     );
   }
 }
 
 class TogglePageBody extends ConsumerWidget {
-  const TogglePageBody({Key? key}) : super(key: key);
+  TogglePageBody({Key? key}) : super(key: key);
 
-  // var controller = TextEditingController(text: 'オフにしてもいいでしょうか？');
+  final controller = TextEditingController(text: 'オフにしてもいいでしょうか？');
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,9 +53,6 @@ class TogglePageBody extends ConsumerWidget {
         value,
       ),
     );
-    // var controller = TextEditingController(
-    //   text: togglePageState.popupText,
-    // );
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -84,13 +81,14 @@ class TogglePageBody extends ConsumerWidget {
                             togglePageState.selectFeedBack,
                           );
                           togglePageNotifier.changeIsOnStatus(value);
-                          if (value == false && togglePageState.popUpStatus) {
+                          if (value == false &&
+                              togglePageState.popUpStatus &&
+                              context.mounted) {
                             bool result = await customPopUp(
                               rootContext: context,
                               messageText: togglePageState.popupText,
                               isAble: togglePageState.popUpStatus,
                             );
-                            print('checking $result');
                             if (result == false) {
                               togglePageNotifier.changeIsOnStatus(
                                 !value,
@@ -180,7 +178,7 @@ class TogglePageBody extends ConsumerWidget {
                         height: 8,
                       ),
                       TextFormField(
-                        // controller: controller,
+                        controller: controller,
                         decoration: InputDecoration(
                           hintText: 'メッセージを入力使用',
                           hintStyle: const TextStyle(
