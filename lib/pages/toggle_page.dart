@@ -11,7 +11,7 @@ import 'package:tooggle/resources/app_colors.dart';
 import 'package:tooggle/models/toogle_page_state/toogle_page_state.dart';
 
 //ViewModels
-import 'package:tooggle/view_models/toogle_page_notifier.dart';
+import 'package:tooggle/view_models/toggle_page_notifier.dart';
 
 class TogglePage extends StatelessWidget {
   const TogglePage({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class TogglePageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TooglePageState togglePageState = ref.watch(togglePageProvider);
-    final TooglePageNotifier togglePageNotifier =
+    final TogglePageNotifier togglePageNotifier =
         ref.watch(togglePageProvider.notifier);
     List<Widget> feedbackButtonList = _feedbackButtonList(
       isSelect: togglePageState.selectFeedBack,

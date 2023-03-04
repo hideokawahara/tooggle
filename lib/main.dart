@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Pages
-import 'package:tooggle/pages/toogle_page.dart';
+import 'package:tooggle/pages/toggle_page.dart';
 
 void main() {
   runApp(

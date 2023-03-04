@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //Models
 import 'package:tooggle/models/toogle_page_state/toogle_page_state.dart';
 
-class TooglePageNotifier extends StateNotifier<TooglePageState> {
-  TooglePageNotifier() : super(const TooglePageState());
+class TogglePageNotifier extends StateNotifier<TooglePageState> {
+  TogglePageNotifier() : super(const TooglePageState());
 
   void changeIsOnStatus(bool value) {
     state = state.copyWith(isOn: value);
@@ -33,6 +33,6 @@ class TooglePageNotifier extends StateNotifier<TooglePageState> {
 }
 
 final togglePageProvider =
-    StateNotifierProvider.autoDispose<TooglePageNotifier, TooglePageState>(
-  (_) => TooglePageNotifier(),
+    StateNotifierProvider.autoDispose<TogglePageNotifier, TooglePageState>(
+  (_) => TogglePageNotifier(),
 );
