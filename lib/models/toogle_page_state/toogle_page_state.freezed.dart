@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$TooglePageState {
+mixin _$TogglePageState {
   bool get isOn => throw _privateConstructorUsedError;
   TapFeedBack get selectFeedBack => throw _privateConstructorUsedError;
   ToggleColor get selectColor => throw _privateConstructorUsedError;
@@ -24,15 +24,15 @@ mixin _$TooglePageState {
   String get popupText => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TooglePageStateCopyWith<TooglePageState> get copyWith =>
+  $TogglePageStateCopyWith<TogglePageState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TooglePageStateCopyWith<$Res> {
-  factory $TooglePageStateCopyWith(
-          TooglePageState value, $Res Function(TooglePageState) then) =
-      _$TooglePageStateCopyWithImpl<$Res, TooglePageState>;
+abstract class $TogglePageStateCopyWith<$Res> {
+  factory $TogglePageStateCopyWith(
+          TogglePageState value, $Res Function(TogglePageState) then) =
+      _$TogglePageStateCopyWithImpl<$Res, TogglePageState>;
   @useResult
   $Res call(
       {bool isOn,
@@ -44,9 +44,9 @@ abstract class $TooglePageStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TooglePageStateCopyWithImpl<$Res, $Val extends TooglePageState>
-    implements $TooglePageStateCopyWith<$Res> {
-  _$TooglePageStateCopyWithImpl(this._value, this._then);
+class _$TogglePageStateCopyWithImpl<$Res, $Val extends TogglePageState>
+    implements $TogglePageStateCopyWith<$Res> {
+  _$TogglePageStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -94,7 +94,7 @@ class _$TooglePageStateCopyWithImpl<$Res, $Val extends TooglePageState>
 
 /// @nodoc
 abstract class _$$_TooglePageStateCopyWith<$Res>
-    implements $TooglePageStateCopyWith<$Res> {
+    implements $TogglePageStateCopyWith<$Res> {
   factory _$$_TooglePageStateCopyWith(
           _$_TooglePageState value, $Res Function(_$_TooglePageState) then) =
       __$$_TooglePageStateCopyWithImpl<$Res>;
@@ -111,7 +111,7 @@ abstract class _$$_TooglePageStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_TooglePageStateCopyWithImpl<$Res>
-    extends _$TooglePageStateCopyWithImpl<$Res, _$_TooglePageState>
+    extends _$TogglePageStateCopyWithImpl<$Res, _$_TooglePageState>
     implements _$$_TooglePageStateCopyWith<$Res> {
   __$$_TooglePageStateCopyWithImpl(
       _$_TooglePageState _value, $Res Function(_$_TooglePageState) _then)
@@ -188,7 +188,7 @@ class _$_TooglePageState implements _TooglePageState {
 
   @override
   String toString() {
-    return 'TooglePageState(isOn: $isOn, selectFeedBack: $selectFeedBack, selectColor: $selectColor, toggleSize: $toggleSize, popUpStatus: $popUpStatus, popupText: $popupText)';
+    return 'TogglePageState(isOn: $isOn, selectFeedBack: $selectFeedBack, selectColor: $selectColor, toggleSize: $toggleSize, popUpStatus: $popUpStatus, popupText: $popupText)';
   }
 
   @override
@@ -220,7 +220,7 @@ class _$_TooglePageState implements _TooglePageState {
       __$$_TooglePageStateCopyWithImpl<_$_TooglePageState>(this, _$identity);
 }
 
-abstract class _TooglePageState implements TooglePageState {
+abstract class _TooglePageState implements TogglePageState {
   const factory _TooglePageState(
       {final bool isOn,
       final TapFeedBack selectFeedBack,

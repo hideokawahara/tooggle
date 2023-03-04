@@ -35,7 +35,7 @@ class TogglePageBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TooglePageState togglePageState = ref.watch(togglePageProvider);
+    final TogglePageState togglePageState = ref.watch(togglePageProvider);
     final TogglePageNotifier togglePageNotifier =
         ref.watch(togglePageProvider.notifier);
     List<Widget> feedbackButtonList = _feedbackButtonList(

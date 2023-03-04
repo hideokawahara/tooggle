@@ -4,8 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'toogle_page_state.freezed.dart';
 
 @freezed
-class TooglePageState with _$TooglePageState {
-  const factory TooglePageState({
+class TogglePageState with _$TogglePageState {
+  const factory TogglePageState({
     @Default(false) bool isOn,
     @Default(TapFeedBack.weak) TapFeedBack selectFeedBack,
     @Default(ToggleColor.green) ToggleColor selectColor,
