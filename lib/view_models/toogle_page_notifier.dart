@@ -32,7 +32,7 @@ class TooglePageNotifier extends StateNotifier<TooglePageState> {
   }
 }
 
-final tooglePageProvider =
+final togglePageProvider =
     StateNotifierProvider.autoDispose<TooglePageNotifier, TooglePageState>(
   (_) => TooglePageNotifier(),
 );

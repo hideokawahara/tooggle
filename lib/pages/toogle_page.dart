@@ -2,9 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Resources
 import 'package:tooggle/resources/app_colors.dart';
+
+//Models
+import 'package:tooggle/models/toogle_page_state/toogle_page_state.dart';
+
+//ViewModels
+import 'package:tooggle/view_models/toogle_page_notifier.dart';
 
 class TogglePage extends StatelessWidget {
   const TogglePage({Key? key}) : super(key: key);
@@ -21,25 +28,35 @@ class TogglePage extends StatelessWidget {
   }
 }
 
-class TogglePageBody extends StatefulWidget {
+class TogglePageBody extends ConsumerWidget {
   const TogglePageBody({Key? key}) : super(key: key);
 
-  @override
-  State<TogglePageBody> createState() => _TogglePageBodyState();
-}
-
-class _TogglePageBodyState extends State<TogglePageBody> {
-  bool isOn = false;
-  TapFeedBack isSelect = TapFeedBack.weak;
-  ToggleColor selectColor = ToggleColor.green;
-  double toggleSize = 200;
-  bool popUpStatus = false;
-  var controller = TextEditingController(text: 'オフにしてもいいでしょうか？');
+  // var controller = TextEditingController(text: 'オフにしてもいいでしょうか？');
 
   @override
-  Widget build(BuildContext context) {
-    List<Widget> feedbackButtonList = _feedbackButtonList();
-    List<Widget> colorButtonList = _toggleColorList();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final TooglePageState togglePageState = ref.watch(togglePageProvider);
+    final TooglePageNotifier togglePageNotifier =
+        ref.watch(togglePageProvider.notifier);
+    List<Widget> feedbackButtonList = _feedbackButtonList(
+      isSelect: togglePageState.selectFeedBack,
+      selectColor: togglePageState.selectColor,
+      selectFeedBackCallBack: (TapFeedBack value) =>
+          togglePageNotifier.changeFeedBack(
+        value,
+      ),
+    );
+    List<Widget> colorButtonList = _toggleColorList(
+      selectColor: togglePageState.selectColor,
+      selectColorCallBack: (ToggleColor value) =>
+          togglePageNotifier.changeToggleColor(
+        value,
+      ),
+    );
+    // var controller = TextEditingController(
+    //   text: togglePageState.popupText,
+    // );
+
     return SafeArea(
       child: SingleChildScrollView(
         clipBehavior: Clip.none,
@@ -53,28 +70,31 @@ class _TogglePageBodyState extends State<TogglePageBody> {
                 height: 200,
                 child: Center(
                   child: SizedBox(
-                    height: toggleSize,
-                    width: toggleSize,
+                    height: togglePageState.toggleSize,
+                    width: togglePageState.toggleSize,
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: CupertinoSwitch(
-                        activeColor: convertToToggleColorValue(selectColor),
-                        value: isOn,
+                        activeColor: convertToToggleColorValue(
+                          togglePageState.selectColor,
+                        ),
+                        value: togglePageState.isOn,
                         onChanged: (bool value) async {
-                          await tapFeedBackAction(isSelect);
-                          setState(() {
-                            isOn = value;
-                          });
-                          if (value == false && popUpStatus) {
+                          await tapFeedBackAction(
+                            togglePageState.selectFeedBack,
+                          );
+                          togglePageNotifier.changeIsOnStatus(value);
+                          if (value == false && togglePageState.popUpStatus) {
                             bool result = await customPopUp(
                               rootContext: context,
-                              messageText: controller.value.text,
-                              isAble: popUpStatus,
+                              messageText: togglePageState.popupText,
+                              isAble: togglePageState.popUpStatus,
                             );
+                            print('checking $result');
                             if (result == false) {
-                              setState(() {
-                                isOn = !isOn;
-                              });
+                              togglePageNotifier.changeIsOnStatus(
+                                !value,
+                              );
                             }
                           }
                         },
@@ -102,14 +122,14 @@ class _TogglePageBodyState extends State<TogglePageBody> {
                   horizontal: 16,
                 ),
                 child: Slider(
-                  value: toggleSize,
+                  value: togglePageState.toggleSize,
                   min: 100,
                   max: 300,
-                  activeColor: convertToToggleColorValue(selectColor),
+                  activeColor: convertToToggleColorValue(
+                    togglePageState.selectColor,
+                  ),
                   onChanged: (double value) {
-                    setState(() {
-                      toggleSize = value;
-                    });
+                    togglePageNotifier.changeToggleSize(value);
                   },
                 ),
               ),
@@ -129,18 +149,18 @@ class _TogglePageBodyState extends State<TogglePageBody> {
                       ),
                     ),
                     CupertinoSwitch(
-                      value: popUpStatus,
-                      activeColor: convertToToggleColorValue(selectColor),
+                      value: togglePageState.popUpStatus,
+                      activeColor: convertToToggleColorValue(
+                        togglePageState.selectColor,
+                      ),
                       onChanged: (bool value) async {
-                        setState(() {
-                          popUpStatus = value;
-                        });
+                        togglePageNotifier.changePopUpStatus(value);
                       },
                     ),
                   ],
                 ),
               ),
-              if (popUpStatus)
+              if (togglePageState.popUpStatus)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
@@ -160,14 +180,15 @@ class _TogglePageBodyState extends State<TogglePageBody> {
                         height: 8,
                       ),
                       TextFormField(
-                        controller: controller,
+                        // controller: controller,
                         decoration: InputDecoration(
                           hintText: 'メッセージを入力使用',
                           hintStyle: const TextStyle(
                             fontSize: 12,
                           ),
-                          fillColor: convertToToggleColorValue(selectColor)
-                              .withOpacity(
+                          fillColor: convertToToggleColorValue(
+                            togglePageState.selectColor,
+                          ).withOpacity(
                             0.3,
                           ),
                           filled: true,
@@ -177,6 +198,11 @@ class _TogglePageBodyState extends State<TogglePageBody> {
                             borderSide: BorderSide.none,
                           ),
                         ),
+                        onChanged: (String? value) {
+                          if (value != null) {
+                            togglePageNotifier.changePopUpText(value);
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -237,7 +263,11 @@ class _TogglePageBodyState extends State<TogglePageBody> {
     }
   }
 
-  List<Widget> _feedbackButtonList() {
+  List<Widget> _feedbackButtonList({
+    required TapFeedBack isSelect,
+    required ToggleColor selectColor,
+    required void Function(TapFeedBack value) selectFeedBackCallBack,
+  }) {
     return TapFeedBack.values.map((select) {
       final String buttonTitle;
       switch (select) {
@@ -256,18 +286,21 @@ class _TogglePageBodyState extends State<TogglePageBody> {
       }
       return FloatingActionButton(
         heroTag: buttonTitle,
-        backgroundColor: isSelect == select ? Colors.grey : convertToToggleColorValue(selectColor),
+        backgroundColor: isSelect == select
+            ? Colors.grey
+            : convertToToggleColorValue(selectColor),
         child: Text(buttonTitle),
         onPressed: () {
-          setState(() {
-            isSelect = select;
-          });
+          selectFeedBackCallBack(select);
         },
       );
     }).toList();
   }
 
-  List<Widget> _toggleColorList() {
+  List<Widget> _toggleColorList({
+    required ToggleColor selectColor,
+    required void Function(ToggleColor value) selectColorCallBack,
+  }) {
     return ToggleColor.values.map((color) {
       final String buttonTitle;
       switch (color) {
@@ -286,12 +319,12 @@ class _TogglePageBodyState extends State<TogglePageBody> {
       }
       return FloatingActionButton(
         heroTag: buttonTitle,
-        backgroundColor: selectColor == color ? Colors.grey : convertToToggleColorValue(selectColor),
+        backgroundColor: selectColor == color
+            ? Colors.grey
+            : convertToToggleColorValue(selectColor),
         child: Text(buttonTitle),
         onPressed: () {
-          setState(() {
-            selectColor = color;
-          });
+          selectColorCallBack(color);
         },
       );
     }).toList();
@@ -309,18 +342,4 @@ class _TogglePageBodyState extends State<TogglePageBody> {
         return Colors.pink;
     }
   }
-}
-
-enum TapFeedBack {
-  weak,
-  medium,
-  strong,
-  vibe,
-}
-
-enum ToggleColor {
-  green,
-  blue,
-  red,
-  pink,
 }
