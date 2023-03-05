@@ -5,13 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Resources
-import 'package:tooggle/resources/app_colors.dart';
+import 'package:tooggle/resources/resources_export.dart';
 
 //Models
-import 'package:tooggle/models/toogle_page_state/toogle_page_state.dart';
+import 'package:tooggle/models/models_export.dart';
 
 //ViewModels
-import 'package:tooggle/view_models/toggle_page_notifier.dart';
+import 'package:tooggle/view_models/view_models_export.dart';
 
 class TogglePage extends StatelessWidget {
   const TogglePage({Key? key}) : super(key: key);
