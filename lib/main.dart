@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Pages
-import 'package:tooggle/pages/toggle_page.dart';
+import 'package:tooggle/pages/pages_export.dart';
 
 void main() {
   runApp(
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const TogglePage(),
+      home: const HomePage(),
     );
   }
 }
