@@ -1,6 +1,7 @@
 //Packages
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tooggle/packages/packages_export.dart';
+
+//Pages
 import 'package:tooggle/pages/pages_export.dart';
 
 //Resources

@@ -1,5 +1,5 @@
 //Packages
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:tooggle/packages/packages_export.dart';
 
 part 'toogle_page_state.freezed.dart';
 

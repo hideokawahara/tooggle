@@ -1,5 +1,5 @@
 //Packages
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tooggle/packages/packages_export.dart';
 
 //Models
 import 'package:tooggle/models/toogle_page_state/toogle_page_state.dart';
