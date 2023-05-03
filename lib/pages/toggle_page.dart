@@ -7,8 +7,14 @@ import 'package:tooggle/resources/resources_export.dart';
 //Models
 import 'package:tooggle/models/models_export.dart';
 
+//Utilities
+import 'package:tooggle/utilities/utilities_export.dart';
+
 //ViewModels
 import 'package:tooggle/view_models/view_models_export.dart';
+
+//Widgets
+import 'package:tooggle/widgets/widgets_export.dart';
 
 class TogglePage extends StatelessWidget {
   const TogglePage({Key? key}) : super(key: key);
@@ -63,38 +69,9 @@ class TogglePageBody extends ConsumerWidget {
               SizedBox(
                 height: 200,
                 child: Center(
-                  child: SizedBox(
-                    height: togglePageState.toggleSize,
-                    width: togglePageState.toggleSize,
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: CupertinoSwitch(
-                        activeColor: convertToToggleColorValue(
-                          togglePageState.selectColor,
-                        ),
-                        value: togglePageState.isOn,
-                        onChanged: (bool value) async {
-                          await tapFeedBackAction(
-                            togglePageState.selectFeedBack,
-                          );
-                          togglePageNotifier.changeIsOnStatus(value);
-                          if (value == false &&
-                              togglePageState.popUpStatus &&
-                              context.mounted) {
-                            bool result = await customPopUp(
-                              rootContext: context,
-                              messageText: togglePageState.popupText,
-                              isAble: togglePageState.popUpStatus,
-                            );
-                            if (result == false) {
-                              togglePageNotifier.changeIsOnStatus(
-                                !value,
-                              );
-                            }
-                          }
-                        },
-                      ),
-                    ),
+                  child: ToggleSwitch(
+                    togglePageState: togglePageState,
+                    togglePageNotifier: togglePageNotifier,
                   ),
                 ),
               ),
@@ -209,55 +186,6 @@ class TogglePageBody extends ConsumerWidget {
     );
   }
 
-  Future<bool> customPopUp({
-    required BuildContext rootContext,
-    required bool isAble,
-    required String messageText,
-  }) async {
-    if (isAble == false) {
-      return false;
-    }
-    return await showCupertinoModalPopup<bool>(
-            context: rootContext,
-            builder: (BuildContext subContext) {
-              return CupertinoActionSheet(
-                message: Text(messageText),
-                actions: [
-                  CupertinoActionSheetAction(
-                    onPressed: () {
-                      Navigator.of(subContext).pop(true);
-                    },
-                    child: const Text('オフにする'),
-                  ),
-                ],
-                cancelButton: CupertinoActionSheetAction(
-                  onPressed: () {
-                    Navigator.of(subContext).pop(false);
-                  },
-                  child: const Text('キャンセル'),
-                ),
-              );
-            }) ??
-        false;
-  }
-
-  Future<void> tapFeedBackAction(TapFeedBack selectFeedback) async {
-    switch (selectFeedback) {
-      case TapFeedBack.weak:
-        await HapticFeedback.selectionClick();
-        break;
-      case TapFeedBack.medium:
-        await HapticFeedback.lightImpact();
-        break;
-      case TapFeedBack.strong:
-        await HapticFeedback.heavyImpact();
-        break;
-      case TapFeedBack.vibe:
-        await HapticFeedback.vibrate();
-        break;
-    }
-  }
-
   List<Widget> _feedbackButtonList({
     required TapFeedBack isSelect,
     required ToggleColor selectColor,
@@ -323,18 +251,5 @@ class TogglePageBody extends ConsumerWidget {
         },
       );
     }).toList();
-  }
-
-  Color convertToToggleColorValue(ToggleColor color) {
-    switch (color) {
-      case ToggleColor.green:
-        return Colors.green;
-      case ToggleColor.blue:
-        return Colors.blue;
-      case ToggleColor.red:
-        return Colors.red;
-      case ToggleColor.pink:
-        return Colors.pink;
-    }
   }
 }
