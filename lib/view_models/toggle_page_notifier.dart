@@ -33,6 +33,6 @@ class TogglePageNotifier extends StateNotifier<TogglePageState> {
 }
 
 final togglePageProvider =
-    StateNotifierProvider.autoDispose<TogglePageNotifier, TogglePageState>(
+    StateNotifierProvider<TogglePageNotifier, TogglePageState>(
   (_) => TogglePageNotifier(),
 );
