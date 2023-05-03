@@ -17,25 +17,32 @@ class HomePage extends StatelessWidget {
         backgroundColor: AppColors.mainAppColor,
         title: const Text('ToogGle'),
       ),
-      body: const HomePageBody(),
+      body: HomePageBody(),
     );
   }
 }
 
 class HomePageBody extends ConsumerWidget {
-  const HomePageBody({Key? key}) : super(key: key);
+  HomePageBody({Key? key}) : super(key: key);
+
+  final List<Map<String, dynamic>> contents = [
+    {'トグル': const TogglePage()},
+    {
+      'プレビュー': const CustomAppPage(),
+    }
+  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListView.builder(
-      itemCount: 3,
+      itemCount: contents.length,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
-          title: const Text('test'),
+          title: Text(contents[index].keys.first),
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => const TogglePage(),
+                builder: (_) => contents[index].values.first,
               ),
             );
           },
