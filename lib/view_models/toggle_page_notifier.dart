@@ -33,9 +33,13 @@ class TogglePageNotifier extends StateNotifier<TogglePageState> {
   void changePopUpText(String value) {
     state = state.copyWith(popupText: value);
   }
+
+  void changeToggle(TogglePageState toggle) {
+    state = toggle;
+  }
 }
 
-final togglePageProvider =
+final masterToggleProvider =
     StateNotifierProvider<TogglePageNotifier, TogglePageState>(
   (_) => TogglePageNotifier(),
 );

@@ -56,10 +56,12 @@ class CanvasWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final List<Widget> canvasList = toggle.asMap().entries.map((entry) {
+      var localValue =
+          ref.watch(masterToggleProvider).copyWith(isOn: entry.value.isOn);
       final toggleProvider =
           StateNotifierProvider<TogglePageNotifier, TogglePageState>(
         (_) => TogglePageNotifier(
-          toggleState: entry.value,
+          toggleState: localValue,
         ),
       );
       return CustomPositionWidget(
