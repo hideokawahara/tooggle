@@ -6,6 +6,7 @@ import 'package:tooggle/resources/resources_export.dart';
 
 //Models
 import 'package:tooggle/models/models_export.dart';
+import 'package:tooggle/view_models/custom_app_page_notifier.dart';
 
 //ViewModels
 import 'package:tooggle/view_models/view_models_export.dart';
@@ -23,7 +24,7 @@ class CustomAppPage extends StatelessWidget {
         backgroundColor: AppColors.mainAppColor,
         title: const Text('ToogGle'),
       ),
-      body: CustomAppPageBody(),
+      body: const CustomAppPageBody(),
     );
   }
 }
@@ -33,37 +34,49 @@ class CustomAppPageBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TogglePageState togglePageState = ref.watch(togglePageProvider);
-    final TogglePageNotifier togglePageNotifier =
-        ref.watch(togglePageProvider.notifier);
+    final CustomAppPageState customAppPageState = ref.watch(customAppProvider);
+    final CustomAppPageNotifier customAppPageNotifier =
+        ref.watch(customAppProvider.notifier);
     return CanvasWidget(
-      widget: ToggleSwitch(
-        togglePageState: togglePageState,
-        togglePageNotifier: togglePageNotifier,
-      ),
+      toggle: customAppPageState.toggle,
+      customAppNotifier: customAppPageNotifier,
     );
   }
 }
 
-class CanvasWidget extends StatelessWidget {
+class CanvasWidget extends ConsumerWidget {
   const CanvasWidget({
     Key? key,
-    required this.widget,
+    required this.toggle,
+    required this.customAppNotifier,
   }) : super(key: key);
-  final Widget widget;
+  final List<TogglePageState> toggle;
+  final CustomAppPageNotifier customAppNotifier;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<Widget> canvasList = toggle.asMap().entries.map((entry) {
+      final toggleProvider =
+          StateNotifierProvider<TogglePageNotifier, TogglePageState>(
+        (_) => TogglePageNotifier(
+          toggleState: entry.value,
+        ),
+      );
+      return CustomPositionWidget(
+        widget: ToggleSwitch(
+          togglePageState: ref.watch(toggleProvider),
+          toggleCallback: (bool value) {
+            ref.watch(toggleProvider.notifier).changeIsOnStatus(value);
+            customAppNotifier.changeToggleState(
+              index: entry.key,
+              toggle: ref.watch(toggleProvider),
+            );
+          },
+        ),
+      );
+    }).toList();
     return Stack(
-      children: [
-        CustomPositionWidget(
-          widget: widget,
-        ),
-        CustomPositionWidget(
-          widget: widget,
-          initialPosition: const Offset(100, 100),
-        ),
-      ],
+      children: canvasList,
     );
   }
 }

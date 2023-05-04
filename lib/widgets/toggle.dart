@@ -7,16 +7,13 @@ import 'package:tooggle/models/models_export.dart';
 //Utilities
 import 'package:tooggle/utilities/utilities_export.dart';
 
-//ViewModels
-import 'package:tooggle/view_models/view_models_export.dart';
-
 class ToggleSwitch extends StatelessWidget {
   final TogglePageState togglePageState;
-  final TogglePageNotifier togglePageNotifier;
+  final void Function(bool) toggleCallback;
   const ToggleSwitch({
     Key? key,
     required this.togglePageState,
-    required this.togglePageNotifier,
+    required this.toggleCallback,
   }) : super(key: key);
 
   @override
@@ -35,7 +32,7 @@ class ToggleSwitch extends StatelessWidget {
             await tapFeedBackAction(
               togglePageState.selectFeedBack,
             );
-            togglePageNotifier.changeIsOnStatus(value);
+            toggleCallback(value);
             if (value == false &&
                 togglePageState.popUpStatus &&
                 context.mounted) {
@@ -45,9 +42,7 @@ class ToggleSwitch extends StatelessWidget {
                 isAble: togglePageState.popUpStatus,
               );
               if (result == false) {
-                togglePageNotifier.changeIsOnStatus(
-                  !value,
-                );
+                toggleCallback(!value);
               }
             }
           },

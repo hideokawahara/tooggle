@@ -71,7 +71,9 @@ class TogglePageBody extends ConsumerWidget {
                 child: Center(
                   child: ToggleSwitch(
                     togglePageState: togglePageState,
-                    togglePageNotifier: togglePageNotifier,
+                    toggleCallback: (bool value) {
+                      togglePageNotifier.changeIsOnStatus(value);
+                    },
                   ),
                 ),
               ),

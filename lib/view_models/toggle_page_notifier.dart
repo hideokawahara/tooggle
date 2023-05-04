@@ -5,7 +5,10 @@ import 'package:tooggle/packages/packages_export.dart';
 import 'package:tooggle/models/toogle_page_state/toogle_page_state.dart';
 
 class TogglePageNotifier extends StateNotifier<TogglePageState> {
-  TogglePageNotifier() : super(const TogglePageState());
+  TogglePageNotifier({
+    this.toggleState,
+  }) : super(toggleState ?? const TogglePageState());
+  final TogglePageState? toggleState;
 
   void changeIsOnStatus(bool value) {
     state = state.copyWith(isOn: value);
