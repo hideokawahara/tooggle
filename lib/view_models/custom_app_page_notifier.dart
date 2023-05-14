@@ -5,7 +5,11 @@ import 'package:tooggle/packages/packages_export.dart';
 import 'package:tooggle/models/models_export.dart';
 
 class CustomAppPageNotifier extends StateNotifier<CustomAppPageState> {
-  CustomAppPageNotifier() : super(const CustomAppPageState());
+  CustomAppPageNotifier()
+      : super(const CustomAppPageState(toggle: [
+          TogglePageState(),
+          TogglePageState(position: Offset(200, 200)),
+        ]));
 
   void changeToggleState({
     required int index,

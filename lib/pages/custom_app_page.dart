@@ -65,6 +65,7 @@ class CanvasWidget extends ConsumerWidget {
         ),
       );
       return CustomPositionWidget(
+        initialPosition: entry.value.position,
         widget: ToggleSwitch(
           togglePageState: ref.watch(toggleProvider),
           toggleCallback: (bool value) {

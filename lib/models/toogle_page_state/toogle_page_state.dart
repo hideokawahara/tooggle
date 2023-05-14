@@ -12,6 +12,7 @@ class TogglePageState with _$TogglePageState {
     @Default(200) double toggleSize,
     @Default(false) bool popUpStatus,
     @Default('オフにしてもいいでしょうか？') String popupText,
+    @Default(Offset(0, 0)) Offset position,
   }) = _TooglePageState;
 }
 

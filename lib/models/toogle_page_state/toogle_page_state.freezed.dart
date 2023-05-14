@@ -22,6 +22,7 @@ mixin _$TogglePageState {
   double get toggleSize => throw _privateConstructorUsedError;
   bool get popUpStatus => throw _privateConstructorUsedError;
   String get popupText => throw _privateConstructorUsedError;
+  Offset get position => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TogglePageStateCopyWith<TogglePageState> get copyWith =>
@@ -40,7 +41,8 @@ abstract class $TogglePageStateCopyWith<$Res> {
       ToggleColor selectColor,
       double toggleSize,
       bool popUpStatus,
-      String popupText});
+      String popupText,
+      Offset position});
 }
 
 /// @nodoc
@@ -62,6 +64,7 @@ class _$TogglePageStateCopyWithImpl<$Res, $Val extends TogglePageState>
     Object? toggleSize = null,
     Object? popUpStatus = null,
     Object? popupText = null,
+    Object? position = null,
   }) {
     return _then(_value.copyWith(
       isOn: null == isOn
@@ -88,6 +91,10 @@ class _$TogglePageStateCopyWithImpl<$Res, $Val extends TogglePageState>
           ? _value.popupText
           : popupText // ignore: cast_nullable_to_non_nullable
               as String,
+      position: null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as Offset,
     ) as $Val);
   }
 }
@@ -106,7 +113,8 @@ abstract class _$$_TooglePageStateCopyWith<$Res>
       ToggleColor selectColor,
       double toggleSize,
       bool popUpStatus,
-      String popupText});
+      String popupText,
+      Offset position});
 }
 
 /// @nodoc
@@ -126,6 +134,7 @@ class __$$_TooglePageStateCopyWithImpl<$Res>
     Object? toggleSize = null,
     Object? popUpStatus = null,
     Object? popupText = null,
+    Object? position = null,
   }) {
     return _then(_$_TooglePageState(
       isOn: null == isOn
@@ -152,6 +161,10 @@ class __$$_TooglePageStateCopyWithImpl<$Res>
           ? _value.popupText
           : popupText // ignore: cast_nullable_to_non_nullable
               as String,
+      position: null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as Offset,
     ));
   }
 }
@@ -165,7 +178,8 @@ class _$_TooglePageState implements _TooglePageState {
       this.selectColor = ToggleColor.green,
       this.toggleSize = 200,
       this.popUpStatus = false,
-      this.popupText = 'オフにしてもいいでしょうか？'});
+      this.popupText = 'オフにしてもいいでしょうか？',
+      this.position = const Offset(0, 0)});
 
   @override
   @JsonKey()
@@ -185,10 +199,13 @@ class _$_TooglePageState implements _TooglePageState {
   @override
   @JsonKey()
   final String popupText;
+  @override
+  @JsonKey()
+  final Offset position;
 
   @override
   String toString() {
-    return 'TogglePageState(isOn: $isOn, selectFeedBack: $selectFeedBack, selectColor: $selectColor, toggleSize: $toggleSize, popUpStatus: $popUpStatus, popupText: $popupText)';
+    return 'TogglePageState(isOn: $isOn, selectFeedBack: $selectFeedBack, selectColor: $selectColor, toggleSize: $toggleSize, popUpStatus: $popUpStatus, popupText: $popupText, position: $position)';
   }
 
   @override
@@ -206,12 +223,14 @@ class _$_TooglePageState implements _TooglePageState {
             (identical(other.popUpStatus, popUpStatus) ||
                 other.popUpStatus == popUpStatus) &&
             (identical(other.popupText, popupText) ||
-                other.popupText == popupText));
+                other.popupText == popupText) &&
+            (identical(other.position, position) ||
+                other.position == position));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isOn, selectFeedBack,
-      selectColor, toggleSize, popUpStatus, popupText);
+      selectColor, toggleSize, popUpStatus, popupText, position);
 
   @JsonKey(ignore: true)
   @override
@@ -227,7 +246,8 @@ abstract class _TooglePageState implements TogglePageState {
       final ToggleColor selectColor,
       final double toggleSize,
       final bool popUpStatus,
-      final String popupText}) = _$_TooglePageState;
+      final String popupText,
+      final Offset position}) = _$_TooglePageState;
 
   @override
   bool get isOn;
@@ -241,6 +261,8 @@ abstract class _TooglePageState implements TogglePageState {
   bool get popUpStatus;
   @override
   String get popupText;
+  @override
+  Offset get position;
   @override
   @JsonKey(ignore: true)
   _$$_TooglePageStateCopyWith<_$_TooglePageState> get copyWith =>
