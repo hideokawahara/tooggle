@@ -1,6 +1,9 @@
 //Packages
 import 'package:tooggle/packages/packages_export.dart';
 
+//Pages
+import 'package:tooggle/pages/toggle_page.dart';
+
 //Resources
 import 'package:tooggle/resources/resources_export.dart';
 
@@ -156,6 +159,11 @@ Future<void> editConfirmPopUp({
             CupertinoActionSheetAction(
               onPressed: () {
                 Navigator.of(subContext).pop();
+                Navigator.of(rootContext).push(
+                  MaterialPageRoute(
+                    builder: (_) => const TogglePage(),
+                  ),
+                );
               },
               child: const Text('編集する'),
             ),
