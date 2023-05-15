@@ -113,6 +113,12 @@ class _CustomPositionWidgetState extends State<CustomPositionWidget> {
     return GestureDetector(
       // ドラッグのスタートをタップした直後に設定
       dragStartBehavior: DragStartBehavior.down,
+      onLongPress: () async {
+        await editConfirmPopUp(
+          rootContext: context,
+          messageText: 'トグルを編集しますか？',
+        );
+      },
       onPanUpdate: (dragUpdateDetails) {
         // position = dragUpdateDetails.localPosition;
         position = Offset(dragUpdateDetails.localPosition.dx - 100,
@@ -135,4 +141,31 @@ class _CustomPositionWidgetState extends State<CustomPositionWidget> {
       ),
     );
   }
+}
+
+Future<void> editConfirmPopUp({
+  required BuildContext rootContext,
+  required String messageText,
+}) async {
+  return await showCupertinoModalPopup<void>(
+      context: rootContext,
+      builder: (BuildContext subContext) {
+        return CupertinoActionSheet(
+          message: Text(messageText),
+          actions: [
+            CupertinoActionSheetAction(
+              onPressed: () {
+                Navigator.of(subContext).pop();
+              },
+              child: const Text('編集する'),
+            ),
+          ],
+          cancelButton: CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.of(subContext).pop();
+            },
+            child: const Text('キャンセル'),
+          ),
+        );
+      });
 }
