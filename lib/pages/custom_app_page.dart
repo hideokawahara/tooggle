@@ -11,6 +11,9 @@ import 'package:tooggle/resources/resources_export.dart';
 import 'package:tooggle/models/models_export.dart';
 import 'package:tooggle/view_models/custom_app_page_notifier.dart';
 
+//Utilities
+import 'package:tooggle/utilities/utilities_export.dart';
+
 //ViewModels
 import 'package:tooggle/view_models/view_models_export.dart';
 
@@ -120,6 +123,7 @@ class _CustomPositionWidgetState extends State<CustomPositionWidget> {
         await editConfirmPopUp(
           rootContext: context,
           messageText: 'トグルを編集しますか？',
+          editPage: const TogglePage(),
         );
       },
       onPanUpdate: (dragUpdateDetails) {
@@ -144,36 +148,4 @@ class _CustomPositionWidgetState extends State<CustomPositionWidget> {
       ),
     );
   }
-}
-
-Future<void> editConfirmPopUp({
-  required BuildContext rootContext,
-  required String messageText,
-}) async {
-  return await showCupertinoModalPopup<void>(
-      context: rootContext,
-      builder: (BuildContext subContext) {
-        return CupertinoActionSheet(
-          message: Text(messageText),
-          actions: [
-            CupertinoActionSheetAction(
-              onPressed: () {
-                Navigator.of(subContext).pop();
-                Navigator.of(rootContext).push(
-                  MaterialPageRoute(
-                    builder: (_) => const TogglePage(),
-                  ),
-                );
-              },
-              child: const Text('編集する'),
-            ),
-          ],
-          cancelButton: CupertinoActionSheetAction(
-            onPressed: () {
-              Navigator.of(subContext).pop();
-            },
-            child: const Text('キャンセル'),
-          ),
-        );
-      });
 }
