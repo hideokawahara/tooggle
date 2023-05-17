@@ -7,22 +7,22 @@ void main() {
   late final StateNotifierProvider<TogglePageNotifier, TogglePageState>
       provider;
   late final TogglePageNotifier notifier;
-  // late final TogglePageState state;
+  late TogglePageState Function() getState;
   setUp(() {
     provider = StateNotifierProvider<TogglePageNotifier, TogglePageState>(
       (_) => TogglePageNotifier(),
     );
     final container = ProviderContainer();
     notifier = container.read(provider.notifier);
-    // state = container.read(provider);
+    getState = () => container.read(provider);
   });
   group('トグルの状態確認のテスト', () {
     test('トグルのスイッチテスト', () {
       expect(notifier.debugState.isOn, false);
-      // expect(state.isOn, false);
+      expect(getState().isOn, false);
       notifier.changeIsOnStatus(true);
       expect(notifier.debugState.isOn, true);
-      // expect(state.isOn, true);
+      expect(getState().isOn, true);
     });
   });
 }
