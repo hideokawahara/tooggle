@@ -4,18 +4,25 @@ import 'package:tooggle/view_models/view_models_export.dart';
 import 'package:tooggle/models/models_export.dart';
 
 void main() {
-  // setUp(() => null)
+  late final StateNotifierProvider<TogglePageNotifier, TogglePageState>
+      provider;
+  late final TogglePageNotifier notifier;
+  // late final TogglePageState state;
+  setUp(() {
+    provider = StateNotifierProvider<TogglePageNotifier, TogglePageState>(
+      (_) => TogglePageNotifier(),
+    );
+    final container = ProviderContainer();
+    notifier = container.read(provider.notifier);
+    // state = container.read(provider);
+  });
   group('トグルの状態確認のテスト', () {
     test('トグルのスイッチテスト', () {
-      final provider =
-          StateNotifierProvider<TogglePageNotifier, TogglePageState>(
-        (_) => TogglePageNotifier(),
-      );
-      final container = ProviderContainer();
-      final notifier = container.read(provider.notifier);
       expect(notifier.debugState.isOn, false);
+      // expect(state.isOn, false);
       notifier.changeIsOnStatus(true);
       expect(notifier.debugState.isOn, true);
+      // expect(state.isOn, true);
     });
   });
 }
