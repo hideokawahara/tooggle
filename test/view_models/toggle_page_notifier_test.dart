@@ -78,4 +78,24 @@ void main() {
       expect(getState().selectColor, ToggleColor.pink);
     });
   });
+  group('トグルのサイズの確認テスト', () {
+    test('トグルのサイズのデフォルトのテスト', () {
+      expect(notifier.debugState.toggleSize, 200);
+      expect(getState().toggleSize, 200);
+    });
+    test('トグルのサイズを100に変更', () {
+      expect(notifier.debugState.toggleSize, 200);
+      expect(getState().toggleSize, 200);
+      notifier.changeToggleSize(100);
+      expect(notifier.debugState.toggleSize, 100);
+      expect(getState().toggleSize, 100);
+    });
+    test('トグルのサイズを300に変更', () {
+      expect(notifier.debugState.toggleSize, 200);
+      expect(getState().toggleSize, 200);
+      notifier.changeToggleSize(300);
+      expect(notifier.debugState.toggleSize, 300);
+      expect(getState().toggleSize, 300);
+    });
+  });
 }
