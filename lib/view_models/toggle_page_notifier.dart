@@ -23,6 +23,7 @@ class TogglePageNotifier extends StateNotifier<TogglePageState> {
   }
 
   void changeToggleSize(double value) {
+    if (value < 100 || value > 300) return;
     state = state.copyWith(toggleSize: value);
   }
 

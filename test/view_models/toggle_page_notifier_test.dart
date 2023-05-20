@@ -97,5 +97,25 @@ void main() {
       expect(notifier.debugState.toggleSize, 300);
       expect(getState().toggleSize, 300);
     });
+    test('トグルのサイズが100未満の場合、変更不可', () {
+      expect(notifier.debugState.toggleSize, 200);
+      expect(getState().toggleSize, 200);
+      notifier.changeToggleSize(100);
+      expect(notifier.debugState.toggleSize, 100);
+      expect(getState().toggleSize, 100);
+      notifier.changeToggleSize(99);
+      expect(notifier.debugState.toggleSize, 100);
+      expect(getState().toggleSize, 100);
+    });
+    test('トグルのサイズが300より上の場合、変更不可', () {
+      expect(notifier.debugState.toggleSize, 200);
+      expect(getState().toggleSize, 200);
+      notifier.changeToggleSize(300);
+      expect(notifier.debugState.toggleSize, 300);
+      expect(getState().toggleSize, 300);
+      notifier.changeToggleSize(301);
+      expect(notifier.debugState.toggleSize, 300);
+      expect(getState().toggleSize, 300);
+    });
   });
 }
