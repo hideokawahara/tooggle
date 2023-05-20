@@ -28,7 +28,6 @@ void main() {
     test('振動のデフォルトのテスト', () {
       expect(notifier.debugState.selectFeedBack, TapFeedBack.weak);
       expect(getState().selectFeedBack, TapFeedBack.weak);
-      notifier.changeFeedBack(TapFeedBack.medium);
     });
     test('振動を中に変更テスト', () {
       expect(notifier.debugState.selectFeedBack, TapFeedBack.weak);
@@ -50,6 +49,33 @@ void main() {
       notifier.changeFeedBack(TapFeedBack.vibe);
       expect(notifier.debugState.selectFeedBack, TapFeedBack.vibe);
       expect(getState().selectFeedBack, TapFeedBack.vibe);
+    });
+  });
+  group('トグルの色の確認テスト', () {
+    test('トグルの色のデフォルトのテスト', () {
+      expect(notifier.debugState.selectColor, ToggleColor.green);
+      expect(getState().selectColor, ToggleColor.green);
+    });
+    test('トグルの色を青に変更テスト', () {
+      expect(notifier.debugState.selectColor, ToggleColor.green);
+      expect(getState().selectColor, ToggleColor.green);
+      notifier.changeToggleColor(ToggleColor.blue);
+      expect(notifier.debugState.selectColor, ToggleColor.blue);
+      expect(getState().selectColor, ToggleColor.blue);
+    });
+    test('トグルの色を赤に変更', () {
+      expect(notifier.debugState.selectColor, ToggleColor.green);
+      expect(getState().selectColor, ToggleColor.green);
+      notifier.changeToggleColor(ToggleColor.red);
+      expect(notifier.debugState.selectColor, ToggleColor.red);
+      expect(getState().selectColor, ToggleColor.red);
+    });
+    test('トグルの色をピンクに変更', () {
+      expect(notifier.debugState.selectColor, ToggleColor.green);
+      expect(getState().selectColor, ToggleColor.green);
+      notifier.changeToggleColor(ToggleColor.pink);
+      expect(notifier.debugState.selectColor, ToggleColor.pink);
+      expect(getState().selectColor, ToggleColor.pink);
     });
   });
 }
