@@ -118,4 +118,20 @@ void main() {
       expect(getState().toggleSize, 300);
     });
   });
+  group('ポップアップステータスの確認ステータス', () {
+    test('ポップアップステータスのデフォルトのテスト', () {
+      expect(notifier.debugState.popUpStatus, false);
+      expect(getState().popUpStatus, false);
+    });
+    test('ポップアップステータスの変更のテスト', () {
+      expect(notifier.debugState.popUpStatus, false);
+      expect(getState().popUpStatus, false);
+      notifier.changePopUpStatus(true);
+      expect(notifier.debugState.popUpStatus, true);
+      expect(getState().popUpStatus, true);
+      notifier.changePopUpStatus(false);
+      expect(notifier.debugState.popUpStatus, false);
+      expect(getState().popUpStatus, false);
+    });
+  });
 }
