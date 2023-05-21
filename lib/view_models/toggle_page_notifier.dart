@@ -40,7 +40,9 @@ class TogglePageNotifier extends StateNotifier<TogglePageState> {
   }
 }
 
-final masterToggleProvider =
-    StateNotifierProvider<TogglePageNotifier, TogglePageState>(
-  (_) => TogglePageNotifier(),
-);
+class ToggleViewModel {
+  static final masterToggleProvider =
+      StateNotifierProvider<TogglePageNotifier, TogglePageState>(
+    (_) => TogglePageNotifier(),
+  );
+}
