@@ -139,5 +139,13 @@ void main() {
       expect(notifier.debugState.popupText, 'オフにしてもいいでしょうか？');
       expect(getState().popupText, 'オフにしてもいいでしょうか？');
     });
+    test('ポップアップのテキスト変更のテスト', () {
+      expect(notifier.debugState.popupText, 'オフにしてもいいでしょうか？');
+      expect(getState().popupText, 'オフにしてもいいでしょうか？');
+      const String testText = 'テキストの変更の確認テスト';
+      notifier.changePopUpText(testText);
+      expect(notifier.debugState.popupText, testText);
+      expect(getState().popupText, testText);
+    });
   });
 }
