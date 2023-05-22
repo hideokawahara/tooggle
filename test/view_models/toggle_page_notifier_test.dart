@@ -118,7 +118,7 @@ void main() {
       expect(getState().toggleSize, 300);
     });
   });
-  group('ポップアップステータスの確認ステータス', () {
+  group('ポップアップステータスの確認テスト', () {
     test('ポップアップステータスのデフォルトのテスト', () {
       expect(notifier.debugState.popUpStatus, false);
       expect(getState().popUpStatus, false);
@@ -132,6 +132,12 @@ void main() {
       notifier.changePopUpStatus(false);
       expect(notifier.debugState.popUpStatus, false);
       expect(getState().popUpStatus, false);
+    });
+  });
+  group('ポップアップのテキストの確認テスト', () {
+    test('ポップアップのテキストのデフォルトのテスト', () {
+      expect(notifier.debugState.popupText, 'オフにしてもいいでしょうか？');
+      expect(getState().popupText, 'オフにしてもいいでしょうか？');
     });
   });
 }
