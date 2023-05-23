@@ -149,7 +149,7 @@ void main() {
     });
   });
   group('トグル変更の確認テスト', () {
-    test('トグルのデフォルトの確認テスト', () {
+    void checkDefaultToggle() {
       expect(notifier.debugState.isOn, false);
       expect(notifier.debugState.selectFeedBack, TapFeedBack.weak);
       expect(notifier.debugState.selectColor, ToggleColor.green);
@@ -164,6 +164,19 @@ void main() {
       expect(getState().popUpStatus, false);
       expect(getState().popupText, 'オフにしてもいいでしょうか？');
       expect(getState().position, const Offset(0, 0));
+    }
+
+    test('トグルのデフォルトの確認テスト', () {
+      checkDefaultToggle();
+    });
+    test('ピンク色に変更したトグルとの変更のテスト', () {
+      checkDefaultToggle();
+      final TogglePageState tempToggle = notifier.debugState.copyWith(
+        selectColor: ToggleColor.pink,
+      );
+      notifier.changeToggle(tempToggle);
+      expect(notifier.debugState.selectColor, ToggleColor.pink);
+      expect(getState().selectColor, ToggleColor.pink);
     });
   });
 }
