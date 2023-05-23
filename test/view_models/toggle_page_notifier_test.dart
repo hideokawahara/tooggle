@@ -148,4 +148,22 @@ void main() {
       expect(getState().popupText, testText);
     });
   });
+  group('トグル変更の確認テスト', () {
+    test('トグルのデフォルトの確認テスト', () {
+      expect(notifier.debugState.isOn, false);
+      expect(notifier.debugState.selectFeedBack, TapFeedBack.weak);
+      expect(notifier.debugState.selectColor, ToggleColor.green);
+      expect(notifier.debugState.toggleSize, 200);
+      expect(notifier.debugState.popUpStatus, false);
+      expect(notifier.debugState.popupText, 'オフにしてもいいでしょうか？');
+      expect(notifier.debugState.position, const Offset(0, 0));
+      expect(getState().isOn, false);
+      expect(getState().selectFeedBack, TapFeedBack.weak);
+      expect(getState().selectColor, ToggleColor.green);
+      expect(getState().toggleSize, 200);
+      expect(getState().popUpStatus, false);
+      expect(getState().popupText, 'オフにしてもいいでしょうか？');
+      expect(getState().position, const Offset(0, 0));
+    });
+  });
 }
