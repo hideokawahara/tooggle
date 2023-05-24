@@ -24,5 +24,19 @@ void main() {
       expect(getState().toggle.length, 2);
       expect(getState().toggle[1].position, const Offset(200, 200));
     });
+    test('トグルの変更のテスト', () {
+      expect(notifier.debugState.toggle.length, 2);
+      expect(notifier.debugState.toggle[1].position, const Offset(200, 200));
+      expect(getState().toggle.length, 2);
+      expect(getState().toggle[1].position, const Offset(200, 200));
+      notifier.changeToggleState(
+        index: 1,
+        toggle: const TogglePageState(
+          position: Offset(201, 201),
+        ),
+      );
+      expect(notifier.debugState.toggle[1].position, const Offset(201, 201));
+      expect(getState().toggle[1].position, const Offset(201, 201));
+    });
   });
 }
