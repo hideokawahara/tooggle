@@ -176,7 +176,7 @@ class _$_TooglePageState implements _TooglePageState {
       {this.isOn = false,
       this.selectFeedBack = TapFeedBack.weak,
       this.selectColor = ToggleColor.green,
-      this.toggleSize = 200,
+      this.toggleSize = AppConfig.defaultDefaultSize,
       this.popUpStatus = false,
       this.popupText = 'オフにしてもいいでしょうか？',
       this.position = const Offset(0, 0)});
