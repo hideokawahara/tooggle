@@ -15,7 +15,7 @@ class TogglePageState with _$TogglePageState {
     @Default(AppConfig.defaultDefaultSize) double toggleSize,
     @Default(false) bool popUpStatus,
     @Default('オフにしてもいいでしょうか？') String popupText,
-    @Default(Offset(0, 0)) Offset position,
+    @Default(AppConfig.defaultPosition) Offset position,
   }) = _TooglePageState;
 }
 

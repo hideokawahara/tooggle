@@ -179,7 +179,7 @@ class _$_TooglePageState implements _TooglePageState {
       this.toggleSize = AppConfig.defaultDefaultSize,
       this.popUpStatus = false,
       this.popupText = 'オフにしてもいいでしょうか？',
-      this.position = const Offset(0, 0)});
+      this.position = AppConfig.defaultPosition});
 
   @override
   @JsonKey()
