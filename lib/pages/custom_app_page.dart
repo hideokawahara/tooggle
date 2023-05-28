@@ -73,6 +73,12 @@ class CanvasWidget extends ConsumerWidget {
       );
       return CustomPositionWidget(
         initialPosition: entry.value.position,
+        changePositionCallBack: (Offset position) {
+          customAppNotifier.changeToggleState(
+            index: entry.key,
+            toggle: localValue.copyWith(position: position),
+          );
+        },
         widget: ToggleSwitch(
           togglePageState: ref.watch(toggleProvider),
           toggleCallback: (bool value) {
@@ -97,9 +103,11 @@ class CustomPositionWidget extends StatefulWidget {
     Key? key,
     required this.widget,
     this.initialPosition,
+    required this.changePositionCallBack,
   }) : super(key: key);
   final Widget widget;
   final Offset? initialPosition;
+  final void Function(Offset) changePositionCallBack;
 
   @override
   State<CustomPositionWidget> createState() => _CustomPositionWidgetState();
@@ -131,6 +139,7 @@ class _CustomPositionWidgetState extends State<CustomPositionWidget> {
         // position = dragUpdateDetails.localPosition;
         position = Offset(dragUpdateDetails.localPosition.dx - 100,
             dragUpdateDetails.localPosition.dy - 100);
+        widget.changePositionCallBack(position);
         setState(() {});
       },
       child: Stack(
