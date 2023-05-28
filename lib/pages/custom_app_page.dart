@@ -71,6 +71,9 @@ class CanvasWidget extends ConsumerWidget {
           toggleState: localValue,
         ),
       );
+      print("position check");
+      print(entry.key);
+      print(entry.value.position);
       return CustomPositionWidget(
         initialPosition: entry.value.position,
         changePositionCallBack: (Offset position) {
@@ -83,6 +86,7 @@ class CanvasWidget extends ConsumerWidget {
           togglePageState: ref.watch(toggleProvider),
           toggleCallback: (bool value) {
             ref.watch(toggleProvider.notifier).changeIsOnStatus(value);
+            //FIXME: トグルの状態が変更すると、位置がデフォルトに戻るバグの修正
             customAppNotifier.changeToggleState(
               index: entry.key,
               toggle: ref.watch(toggleProvider),
