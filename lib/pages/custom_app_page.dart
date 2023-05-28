@@ -98,31 +98,16 @@ class CanvasWidget extends ConsumerWidget {
 }
 
 //Todo: ConsumerWidgetに差し替える
-class CustomPositionWidget extends StatefulWidget {
+class CustomPositionWidget extends StatelessWidget {
   const CustomPositionWidget({
     Key? key,
     required this.widget,
-    this.initialPosition,
+    required this.initialPosition,
     required this.changePositionCallBack,
   }) : super(key: key);
   final Widget widget;
-  final Offset? initialPosition;
+  final Offset initialPosition;
   final void Function(Offset) changePositionCallBack;
-
-  @override
-  State<CustomPositionWidget> createState() => _CustomPositionWidgetState();
-}
-
-class _CustomPositionWidgetState extends State<CustomPositionWidget> {
-  var position = const Offset(0, 0);
-  @override
-  void initState() {
-    super.initState();
-    if (widget.initialPosition != null) {
-      position = widget.initialPosition!;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -136,24 +121,19 @@ class _CustomPositionWidgetState extends State<CustomPositionWidget> {
         );
       },
       onPanUpdate: (dragUpdateDetails) {
-        // position = dragUpdateDetails.localPosition;
-        position = Offset(dragUpdateDetails.localPosition.dx - 100,
+        var position = Offset(dragUpdateDetails.localPosition.dx - 100,
             dragUpdateDetails.localPosition.dy - 100);
-        widget.changePositionCallBack(position);
-        setState(() {});
+        changePositionCallBack(position);
       },
       child: Stack(
         children: [
           Positioned(
             // 左上からどれだけ右にあるか
-            left: position.dx,
+            left: initialPosition.dx,
             // 左上からどれだけ下にあるか
-            top: position.dy,
-            child: widget.widget,
+            top: initialPosition.dy,
+            child: widget,
           ),
-          // Container(
-          //   color: Colors.transparent,
-          // ),
         ],
       ),
     );
