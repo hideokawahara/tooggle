@@ -84,7 +84,6 @@ class CanvasWidget extends ConsumerWidget {
         widget: ToggleSwitch(
           togglePageState: ref.watch(toggleProvider),
           toggleCallback: (bool value) {
-            ref.watch(toggleProvider.notifier).changeIsOnStatus(value);
             customAppNotifier.changeToggleState(
               index: entry.key,
               toggle: ref
@@ -93,6 +92,7 @@ class CanvasWidget extends ConsumerWidget {
                   )
                   .copyWith(
                     position: entry.value.position,
+                    isOn: value,
                   ),
             );
           },
