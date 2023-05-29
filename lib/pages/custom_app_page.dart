@@ -62,6 +62,8 @@ class CanvasWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final List<Widget> canvasList = toggle.asMap().entries.map((entry) {
+      // マスターで設定されたものを初めに引き継いで、各トグルにproviderを作成する
+      // 変更した状態を反映させたいときは、customAppNotifierを用いる
       var localValue = ref
           .watch(ToggleViewModel.masterToggleProvider)
           .copyWith(isOn: entry.value.isOn);
