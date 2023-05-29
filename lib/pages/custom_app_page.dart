@@ -40,9 +40,10 @@ class CustomAppPageBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final CustomAppPageState customAppPageState = ref.watch(customAppProvider);
+    final CustomAppPageState customAppPageState =
+        ref.watch(CustomAppViewModel.masterCustomAppProvider);
     final CustomAppPageNotifier customAppPageNotifier =
-        ref.watch(customAppProvider.notifier);
+        ref.watch(CustomAppViewModel.masterCustomAppProvider.notifier);
     return CanvasWidget(
       toggle: customAppPageState.toggle,
       customAppNotifier: customAppPageNotifier,
@@ -63,7 +64,7 @@ class CanvasWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final List<Widget> canvasList = toggle.asMap().entries.map((entry) {
       // マスターで設定されたものを初めに引き継いで、各トグルにproviderを作成する
-      // 変更した状態を反映させたいときは、customAppNotifierを用いる
+      // 変更した状態を反映させたいときは、CustomAppViewModel.masterCustomAppProviderのnotifierを用いる
       var localValue = ref
           .watch(ToggleViewModel.masterToggleProvider)
           .copyWith(isOn: entry.value.isOn);

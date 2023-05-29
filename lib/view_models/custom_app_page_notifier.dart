@@ -22,7 +22,9 @@ class CustomAppPageNotifier extends StateNotifier<CustomAppPageState> {
   }
 }
 
-final customAppProvider =
-    StateNotifierProvider<CustomAppPageNotifier, CustomAppPageState>(
-  (_) => CustomAppPageNotifier(),
-);
+class CustomAppViewModel {
+  static final masterCustomAppProvider =
+      StateNotifierProvider<CustomAppPageNotifier, CustomAppPageState>(
+    (_) => CustomAppPageNotifier(),
+  );
+}
