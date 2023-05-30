@@ -17,7 +17,12 @@ import 'package:tooggle/view_models/view_models_export.dart';
 import 'package:tooggle/widgets/widgets_export.dart';
 
 class TogglePage extends StatelessWidget {
-  const TogglePage({Key? key}) : super(key: key);
+  const TogglePage({
+    Key? key,
+    this.rootProvider,
+  }) : super(key: key);
+  final StateNotifierProvider<TogglePageNotifier, TogglePageState>?
+      rootProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +31,33 @@ class TogglePage extends StatelessWidget {
         backgroundColor: AppColors.mainAppColor,
         title: const Text('ToogGle'),
       ),
-      body: TogglePageBody(),
+      body: TogglePageBody(
+        rootProvider: rootProvider,
+      ),
     );
   }
 }
 
 class TogglePageBody extends ConsumerWidget {
-  TogglePageBody({Key? key}) : super(key: key);
+  TogglePageBody({
+    Key? key,
+    required this.rootProvider,
+  }) : super(key: key);
+  final StateNotifierProvider<TogglePageNotifier, TogglePageState>?
+      rootProvider;
 
   final controller = TextEditingController(text: 'オフにしてもいいでしょうか？');
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TogglePageState togglePageState =
-        ref.watch(ToggleViewModel.masterToggleProvider);
+    StateNotifierProvider<TogglePageNotifier, TogglePageState> toggleProvider =
+        ToggleViewModel.masterToggleProvider;
+    if (rootProvider != null) {
+      toggleProvider = rootProvider!;
+    }
+    final TogglePageState togglePageState = ref.watch(toggleProvider);
     final TogglePageNotifier togglePageNotifier =
-        ref.watch(ToggleViewModel.masterToggleProvider.notifier);
+        ref.watch(toggleProvider.notifier);
     List<Widget> feedbackButtonList = _feedbackButtonList(
       isSelect: togglePageState.selectFeedBack,
       selectColor: togglePageState.selectColor,
