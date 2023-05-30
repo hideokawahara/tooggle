@@ -9,7 +9,6 @@ import 'package:tooggle/resources/resources_export.dart';
 
 //Models
 import 'package:tooggle/models/models_export.dart';
-import 'package:tooggle/view_models/custom_app_page_notifier.dart';
 
 //Utilities
 import 'package:tooggle/utilities/utilities_export.dart';
