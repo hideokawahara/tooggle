@@ -64,6 +64,7 @@ class CanvasWidget extends ConsumerWidget {
     final List<Widget> canvasList = toggle.asMap().entries.map((entry) {
       // マスターで設定されたものを初めに引き継いで、各トグルにproviderを作成する
       // 変更した状態を反映させたいときは、CustomAppViewModel.masterCustomAppProviderのnotifierを用いる
+      //FIXME: 生成されるたびにマスターの状態を反映されて、設定がリセットされるため、条件を追加する
       var localValue = ref
           .watch(ToggleViewModel.masterToggleProvider)
           .copyWith(isOn: entry.value.isOn);
