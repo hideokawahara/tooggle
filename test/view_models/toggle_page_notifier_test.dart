@@ -179,4 +179,19 @@ void main() {
       expect(getState().selectColor, ToggleColor.pink);
     });
   });
+
+  group('トグルのマスター設定の確認テスト', () {
+    test('マスター設定のデフォルトのテスト', () {
+      expect(notifier.debugState.applyMasterSettings, true);
+      expect(getState().applyMasterSettings, true);
+    });
+
+    test('マスター設定変更のテスト', () {
+      expect(notifier.debugState.applyMasterSettings, true);
+      expect(getState().applyMasterSettings, true);
+      notifier.changeApplyMasterSettings(false);
+      expect(notifier.debugState.applyMasterSettings, false);
+      expect(getState().applyMasterSettings, false);
+    });
+  });
 }
