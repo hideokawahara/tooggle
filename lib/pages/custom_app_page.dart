@@ -68,6 +68,9 @@ class CanvasWidget extends ConsumerWidget {
       var localValue = ref
           .watch(ToggleViewModel.masterToggleProvider)
           .copyWith(isOn: entry.value.isOn);
+      if (!localValue.applyMasterSettings) {
+        localValue = entry.value;
+      }
       final toggleProvider =
           StateNotifierProvider<TogglePageNotifier, TogglePageState>(
         (_) => TogglePageNotifier(
@@ -76,6 +79,21 @@ class CanvasWidget extends ConsumerWidget {
       );
       return CustomPositionWidget(
         initialPosition: entry.value.position,
+        provider: toggleProvider,
+        changeStateCallBack:
+            (StateNotifierProvider<TogglePageNotifier, TogglePageState>
+                toggle) {
+          customAppNotifier.changeToggleState(
+            index: entry.key,
+            toggle: ref.watch(toggle).copyWith(
+                  selectColor: ref.watch(toggle).selectColor,
+                  position: entry.value.position,
+                ),
+          );
+          ref
+              .watch(ToggleViewModel.masterToggleProvider.notifier)
+              .changeApplyMasterSettings(false);
+        },
         changePositionCallBack: (Offset position) {
           customAppNotifier.changeToggleState(
             index: entry.key,
@@ -113,10 +131,17 @@ class CustomPositionWidget extends StatelessWidget {
     required this.widget,
     required this.initialPosition,
     required this.changePositionCallBack,
+    required this.provider,
+    required this.changeStateCallBack,
   }) : super(key: key);
   final Widget widget;
   final Offset initialPosition;
   final void Function(Offset) changePositionCallBack;
+  //TODO: もう少し抽象的な型にする
+  final StateNotifierProvider<TogglePageNotifier, TogglePageState> provider;
+  final void Function(
+          StateNotifierProvider<TogglePageNotifier, TogglePageState>)
+      changeStateCallBack;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -126,8 +151,12 @@ class CustomPositionWidget extends StatelessWidget {
         await editConfirmPopUp(
           rootContext: context,
           messageText: 'トグルを編集しますか？',
-          editPage: const TogglePage(),
+          editPage: TogglePage(
+            rootProvider: provider,
+          ),
         );
+        // provider.read
+        changeStateCallBack(provider);
       },
       onPanUpdate: (dragUpdateDetails) {
         var position = Offset(dragUpdateDetails.localPosition.dx - 100,

@@ -23,6 +23,7 @@ mixin _$TogglePageState {
   bool get popUpStatus => throw _privateConstructorUsedError;
   String get popupText => throw _privateConstructorUsedError;
   Offset get position => throw _privateConstructorUsedError;
+  bool get applyMasterSettings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TogglePageStateCopyWith<TogglePageState> get copyWith =>
@@ -42,7 +43,8 @@ abstract class $TogglePageStateCopyWith<$Res> {
       double toggleSize,
       bool popUpStatus,
       String popupText,
-      Offset position});
+      Offset position,
+      bool applyMasterSettings});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$TogglePageStateCopyWithImpl<$Res, $Val extends TogglePageState>
     Object? popUpStatus = null,
     Object? popupText = null,
     Object? position = null,
+    Object? applyMasterSettings = null,
   }) {
     return _then(_value.copyWith(
       isOn: null == isOn
@@ -95,6 +98,10 @@ class _$TogglePageStateCopyWithImpl<$Res, $Val extends TogglePageState>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as Offset,
+      applyMasterSettings: null == applyMasterSettings
+          ? _value.applyMasterSettings
+          : applyMasterSettings // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -114,7 +121,8 @@ abstract class _$$_TooglePageStateCopyWith<$Res>
       double toggleSize,
       bool popUpStatus,
       String popupText,
-      Offset position});
+      Offset position,
+      bool applyMasterSettings});
 }
 
 /// @nodoc
@@ -135,6 +143,7 @@ class __$$_TooglePageStateCopyWithImpl<$Res>
     Object? popUpStatus = null,
     Object? popupText = null,
     Object? position = null,
+    Object? applyMasterSettings = null,
   }) {
     return _then(_$_TooglePageState(
       isOn: null == isOn
@@ -165,6 +174,10 @@ class __$$_TooglePageStateCopyWithImpl<$Res>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as Offset,
+      applyMasterSettings: null == applyMasterSettings
+          ? _value.applyMasterSettings
+          : applyMasterSettings // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -179,7 +192,8 @@ class _$_TooglePageState implements _TooglePageState {
       this.toggleSize = AppConfig.defaultDefaultSize,
       this.popUpStatus = false,
       this.popupText = 'オフにしてもいいでしょうか？',
-      this.position = AppConfig.defaultPosition});
+      this.position = AppConfig.defaultPosition,
+      this.applyMasterSettings = true});
 
   @override
   @JsonKey()
@@ -202,10 +216,13 @@ class _$_TooglePageState implements _TooglePageState {
   @override
   @JsonKey()
   final Offset position;
+  @override
+  @JsonKey()
+  final bool applyMasterSettings;
 
   @override
   String toString() {
-    return 'TogglePageState(isOn: $isOn, selectFeedBack: $selectFeedBack, selectColor: $selectColor, toggleSize: $toggleSize, popUpStatus: $popUpStatus, popupText: $popupText, position: $position)';
+    return 'TogglePageState(isOn: $isOn, selectFeedBack: $selectFeedBack, selectColor: $selectColor, toggleSize: $toggleSize, popUpStatus: $popUpStatus, popupText: $popupText, position: $position, applyMasterSettings: $applyMasterSettings)';
   }
 
   @override
@@ -225,12 +242,22 @@ class _$_TooglePageState implements _TooglePageState {
             (identical(other.popupText, popupText) ||
                 other.popupText == popupText) &&
             (identical(other.position, position) ||
-                other.position == position));
+                other.position == position) &&
+            (identical(other.applyMasterSettings, applyMasterSettings) ||
+                other.applyMasterSettings == applyMasterSettings));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isOn, selectFeedBack,
-      selectColor, toggleSize, popUpStatus, popupText, position);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isOn,
+      selectFeedBack,
+      selectColor,
+      toggleSize,
+      popUpStatus,
+      popupText,
+      position,
+      applyMasterSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -247,7 +274,8 @@ abstract class _TooglePageState implements TogglePageState {
       final double toggleSize,
       final bool popUpStatus,
       final String popupText,
-      final Offset position}) = _$_TooglePageState;
+      final Offset position,
+      final bool applyMasterSettings}) = _$_TooglePageState;
 
   @override
   bool get isOn;
@@ -263,6 +291,8 @@ abstract class _TooglePageState implements TogglePageState {
   String get popupText;
   @override
   Offset get position;
+  @override
+  bool get applyMasterSettings;
   @override
   @JsonKey(ignore: true)
   _$$_TooglePageStateCopyWith<_$_TooglePageState> get copyWith =>

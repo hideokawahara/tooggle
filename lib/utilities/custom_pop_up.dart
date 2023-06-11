@@ -13,13 +13,15 @@ Future<void> editConfirmPopUp({
         message: Text(messageText),
         actions: [
           CupertinoActionSheetAction(
-            onPressed: () {
-              Navigator.of(subContext).pop();
-              Navigator.of(rootContext).push(
+            onPressed: () async {
+              // Navigator.of(subContext).pop();
+              await Navigator.of(rootContext).push(
                 MaterialPageRoute(
                   builder: (_) => editPage,
                 ),
               );
+              Navigator.of(subContext).pop();
+              print("finish?");
             },
             child: const Text('編集する'),
           ),

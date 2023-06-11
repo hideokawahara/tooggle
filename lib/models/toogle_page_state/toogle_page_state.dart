@@ -16,6 +16,7 @@ class TogglePageState with _$TogglePageState {
     @Default(false) bool popUpStatus,
     @Default('オフにしてもいいでしょうか？') String popupText,
     @Default(AppConfig.defaultPosition) Offset position,
+    @Default(true) bool applyMasterSettings,
   }) = _TooglePageState;
 }
 
