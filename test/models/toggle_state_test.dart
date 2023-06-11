@@ -14,5 +14,6 @@ void main() {
     expect(toggle.popUpStatus, false);
     expect(toggle.popupText, 'オフにしてもいいでしょうか？');
     expect(toggle.position, const Offset(0, 0));
+    expect(toggle.applyMasterSettings, true);
   });
 }
