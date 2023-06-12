@@ -77,7 +77,7 @@ class CanvasWidget extends ConsumerWidget {
           toggleState: localValue,
         ),
       );
-      return CustomPositionWidget(
+      return CustomPositionWidget<TogglePageNotifier, TogglePageState>(
         initialPosition: entry.value.position,
         provider: toggleProvider,
         changeStateCallBack:
@@ -125,7 +125,8 @@ class CanvasWidget extends ConsumerWidget {
 }
 
 //Todo: ConsumerWidgetに差し替える
-class CustomPositionWidget extends StatelessWidget {
+class CustomPositionWidget<T extends StateNotifier<K>, K>
+    extends StatelessWidget {
   const CustomPositionWidget({
     Key? key,
     required this.widget,
@@ -137,11 +138,8 @@ class CustomPositionWidget extends StatelessWidget {
   final Widget widget;
   final Offset initialPosition;
   final void Function(Offset) changePositionCallBack;
-  //TODO: もう少し抽象的な型にする
-  final StateNotifierProvider<TogglePageNotifier, TogglePageState> provider;
-  final void Function(
-          StateNotifierProvider<TogglePageNotifier, TogglePageState>)
-      changeStateCallBack;
+  final StateNotifierProvider<T, K> provider;
+  final void Function(StateNotifierProvider<T, K>) changeStateCallBack;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -152,7 +150,8 @@ class CustomPositionWidget extends StatelessWidget {
           rootContext: context,
           messageText: 'トグルを編集しますか？',
           editPage: TogglePage(
-            rootProvider: provider,
+            rootProvider: provider
+                as StateNotifierProvider<TogglePageNotifier, TogglePageState>,
           ),
         );
         // provider.read
