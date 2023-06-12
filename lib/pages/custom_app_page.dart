@@ -146,6 +146,7 @@ class CustomPositionWidget<T extends StateNotifier<K>, K>
       // ドラッグのスタートをタップした直後に設定
       dragStartBehavior: DragStartBehavior.down,
       onLongPress: () async {
+        //Todo: 型チェックの記述を追加する
         await editConfirmPopUp(
           rootContext: context,
           messageText: 'トグルを編集しますか？',
