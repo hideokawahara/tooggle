@@ -146,13 +146,11 @@ class CustomPositionWidget<T extends StateNotifier<K>, K>
       // ドラッグのスタートをタップした直後に設定
       dragStartBehavior: DragStartBehavior.down,
       onLongPress: () async {
-        //Todo: 型チェックの記述を追加する
         await editConfirmPopUp(
           rootContext: context,
           messageText: 'トグルを編集しますか？',
-          editPage: TogglePage(
-            rootProvider: provider
-                as StateNotifierProvider<TogglePageNotifier, TogglePageState>,
+          editPage: convertNextPage<T, K>(
+            provider: provider,
           ),
         );
         // provider.read
@@ -175,5 +173,19 @@ class CustomPositionWidget<T extends StateNotifier<K>, K>
         ],
       ),
     );
+  }
+}
+
+Widget convertNextPage<T extends StateNotifier<K>, K>({
+  required StateNotifierProvider<T, K> provider,
+}) {
+  switch (provider.runtimeType) {
+    case StateNotifierProvider<TogglePageNotifier, TogglePageState>:
+      return TogglePage(
+        rootProvider: provider
+            as StateNotifierProvider<TogglePageNotifier, TogglePageState>,
+      );
+    default:
+      return Container();
   }
 }
