@@ -35,6 +35,7 @@ class TogglePageNotifier extends StateNotifier<TogglePageState> {
     state = state.copyWith(popupText: value);
   }
 
+  //Todo: どの条件時に変更するのか、要件を固める
   void changeApplyMasterSettings(bool value) {
     state = state.copyWith(applyMasterSettings: value);
   }
