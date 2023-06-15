@@ -29,7 +29,51 @@ class CustomAppPage extends StatelessWidget {
         backgroundColor: AppColors.mainAppColor,
         title: const Text('ToogGle'),
       ),
+      endDrawer: CustomAppDrawer(),
       body: const CustomAppPageBody(),
+    );
+  }
+}
+
+class CustomAppDrawer extends StatelessWidget {
+  CustomAppDrawer({super.key});
+
+  final Map<String, dynamic> contents = {
+    "トグル": "toggle",
+    "プルトゥリフレッシュ": "pull",
+  };
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: AppColors.mainAppColor,
+            ),
+            padding: EdgeInsets.all(50),
+            child: Text(
+              'Drawer Header',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: contents.length,
+              itemBuilder: (BuildContext listContext, int index) {
+                return ListTile(
+                  title: Text(
+                    contents.keys.toList()[index],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
