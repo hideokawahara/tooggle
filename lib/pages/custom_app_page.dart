@@ -47,13 +47,14 @@ class CustomAppDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: AppColors.mainAppColor,
-            ),
-            padding: EdgeInsets.all(50),
-            child: Text(
-              'Drawer Header',
+          Container(
+            color: AppColors.mainAppColor,
+            height: 120,
+            alignment: Alignment.center,
+            width: double.infinity,
+            padding: const EdgeInsets.only(top: 48),
+            child: const Text(
+              '設定',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -62,11 +63,15 @@ class CustomAppDrawer extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
+              padding: EdgeInsets.zero,
               itemCount: contents.length,
               itemBuilder: (BuildContext listContext, int index) {
                 return ListTile(
                   title: Text(
                     contents.keys.toList()[index],
+                  ),
+                  trailing: const Icon(
+                    Icons.add_circle_rounded,
                   ),
                 );
               },
