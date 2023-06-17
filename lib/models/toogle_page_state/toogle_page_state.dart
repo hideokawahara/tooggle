@@ -12,10 +12,10 @@ class TogglePageState with _$TogglePageState {
     @Default(false) bool isOn,
     @Default(TapFeedBack.weak) TapFeedBack selectFeedBack,
     @Default(ToggleColor.green) ToggleColor selectColor,
-    @Default(AppConfig.defaultDefaultSize) double toggleSize,
+    @Default(AppConfigs.defaultDefaultSize) double toggleSize,
     @Default(false) bool popUpStatus,
     @Default('オフにしてもいいでしょうか？') String popupText,
-    @Default(AppConfig.defaultPosition) Offset position,
+    @Default(AppConfigs.defaultPosition) Offset position,
     @Default(true) bool applyMasterSettings,
   }) = _TooglePageState;
 }

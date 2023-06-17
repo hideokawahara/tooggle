@@ -189,10 +189,10 @@ class _$_TooglePageState implements _TooglePageState {
       {this.isOn = false,
       this.selectFeedBack = TapFeedBack.weak,
       this.selectColor = ToggleColor.green,
-      this.toggleSize = AppConfig.defaultDefaultSize,
+      this.toggleSize = AppConfigs.defaultDefaultSize,
       this.popUpStatus = false,
       this.popupText = 'オフにしてもいいでしょうか？',
-      this.position = AppConfig.defaultPosition,
+      this.position = AppConfigs.defaultPosition,
       this.applyMasterSettings = true});
 
   @override
