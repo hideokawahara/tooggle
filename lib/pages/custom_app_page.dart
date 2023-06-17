@@ -70,8 +70,9 @@ class CustomAppDrawer extends StatelessWidget {
                   title: Text(
                     contents.keys.toList()[index],
                   ),
-                  trailing: const Icon(
-                    Icons.add_circle_rounded,
+                  trailing: AppIcons.copyAddIcon(
+                    //TODO: 他に良い色がないか検討する
+                    color: AppColors.mainAppColor,
                   ),
                 );
               },
