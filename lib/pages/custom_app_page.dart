@@ -74,6 +74,10 @@ class CustomAppDrawer extends StatelessWidget {
                     //TODO: 他に良い色がないか検討する
                     color: AppColors.mainAppColor,
                   ),
+                  onTap: () {
+                    //TODO: 追加ロジックを追加する
+                    print(contents.values.toList()[index]);
+                  },
                 );
               },
             ),
