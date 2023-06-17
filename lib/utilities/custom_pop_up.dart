@@ -25,6 +25,14 @@ Future<void> editConfirmPopUp({
             },
             child: const Text('編集する'),
           ),
+          CupertinoActionSheetAction(
+            onPressed: () async {
+              //TODO: 削除ロジックを追加する
+              Navigator.of(subContext).pop();
+            },
+            isDestructiveAction: true,
+            child: const Text('削除する'),
+          ),
         ],
         cancelButton: CupertinoActionSheetAction(
           onPressed: () {
