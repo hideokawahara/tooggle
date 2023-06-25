@@ -30,6 +30,14 @@ class CustomAppPageNotifier extends StateNotifier<CustomAppPageState> {
         .toList();
     state = state.copyWith(toggle: tempList);
   }
+
+  void addToggle() {
+    final List<TogglePageState> tempList = [
+      ...state.toggle,
+      const TogglePageState(),
+    ];
+    state = state.copyWith(toggle: tempList);
+  }
 }
 
 class CustomAppViewModel {

@@ -35,7 +35,7 @@ class CustomAppPage extends StatelessWidget {
   }
 }
 
-class CustomAppDrawer extends StatelessWidget {
+class CustomAppDrawer extends ConsumerWidget {
   CustomAppDrawer({super.key});
 
   final Map<String, dynamic> contents = {
@@ -43,7 +43,9 @@ class CustomAppDrawer extends StatelessWidget {
     "プルトゥリフレッシュ": "pull",
   };
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final CustomAppPageNotifier customAppPageNotifier =
+        ref.watch(CustomAppViewModel.masterCustomAppProvider.notifier);
     return Drawer(
       child: Column(
         children: [
@@ -75,8 +77,8 @@ class CustomAppDrawer extends StatelessWidget {
                     color: AppColors.mainAppColor,
                   ),
                   onTap: () {
-                    //TODO: 追加ロジックを追加する
-                    print(contents.values.toList()[index]);
+                    //TODO: コンテンツごとの追加の条件分岐を追加する
+                    customAppPageNotifier.addToggle();
                   },
                 );
               },
