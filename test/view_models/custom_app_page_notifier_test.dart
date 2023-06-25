@@ -38,5 +38,13 @@ void main() {
       expect(notifier.debugState.toggle[1].position, const Offset(201, 201));
       expect(getState().toggle[1].position, const Offset(201, 201));
     });
+
+    test('トグル追加のテスト', () {
+      expect(notifier.debugState.toggle.length, 2);
+      expect(getState().toggle.length, 2);
+      notifier.addToggle();
+      expect(notifier.debugState.toggle.length, 3);
+      expect(getState().toggle.length, 3);
+    });
   });
 }
