@@ -1,12 +1,13 @@
 //Packages
 import 'package:tooggle/packages/packages_export.dart';
 
-Future<void> editConfirmPopUp({
+Future<EditResultType?> editConfirmPopUp({
   required BuildContext rootContext,
   required String messageText,
   required Widget editPage,
+  required Function deleteCallBack,
 }) async {
-  return await showCupertinoModalPopup<void>(
+  return await showCupertinoModalPopup<EditResultType?>(
     context: rootContext,
     builder: (BuildContext subContext) {
       return CupertinoActionSheet(
@@ -20,15 +21,15 @@ Future<void> editConfirmPopUp({
                   builder: (_) => editPage,
                 ),
               );
-              Navigator.of(subContext).pop();
               print("finish?");
+              return Navigator.of(subContext).pop(EditResultType.editSuccess);
             },
             child: const Text('編集する'),
           ),
           CupertinoActionSheetAction(
             onPressed: () async {
-              //TODO: 削除ロジックを追加する
-              Navigator.of(subContext).pop();
+              deleteCallBack();
+              return Navigator.of(subContext).pop(EditResultType.delete);
             },
             isDestructiveAction: true,
             child: const Text('削除する'),
@@ -43,4 +44,10 @@ Future<void> editConfirmPopUp({
       );
     },
   );
+}
+
+enum EditResultType {
+  none,
+  editSuccess,
+  delete,
 }

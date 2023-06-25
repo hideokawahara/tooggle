@@ -154,6 +154,8 @@ class CanvasWidget extends ConsumerWidget {
             toggle: localValue.copyWith(position: position),
           );
         },
+        deleteCallBack: () =>
+            customAppNotifier.deleteToggleState(index: entry.key),
         widget: ToggleSwitch(
           togglePageState: ref.watch(toggleProvider),
           toggleCallback: (bool value) {
@@ -181,34 +183,38 @@ class CanvasWidget extends ConsumerWidget {
 //Todo: ConsumerWidgetに差し替える
 class CustomPositionWidget<T extends StateNotifier<K>, K>
     extends StatelessWidget {
-  const CustomPositionWidget({
-    Key? key,
-    required this.widget,
-    required this.initialPosition,
-    required this.changePositionCallBack,
-    required this.provider,
-    required this.changeStateCallBack,
-  }) : super(key: key);
+  const CustomPositionWidget(
+      {Key? key,
+      required this.widget,
+      required this.initialPosition,
+      required this.changePositionCallBack,
+      required this.provider,
+      required this.changeStateCallBack,
+      required this.deleteCallBack})
+      : super(key: key);
   final Widget widget;
   final Offset initialPosition;
   final void Function(Offset) changePositionCallBack;
   final StateNotifierProvider<T, K> provider;
   final void Function(StateNotifierProvider<T, K>) changeStateCallBack;
+  final void Function() deleteCallBack;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       // ドラッグのスタートをタップした直後に設定
       dragStartBehavior: DragStartBehavior.down,
       onLongPress: () async {
-        await editConfirmPopUp(
+        EditResultType? result = await editConfirmPopUp(
           rootContext: context,
           messageText: 'トグルを編集しますか？',
           editPage: convertNextPage<T, K>(
             provider: provider,
           ),
+          deleteCallBack: () => deleteCallBack(),
         );
-        // provider.read
-        changeStateCallBack(provider);
+        if (result != null && result == EditResultType.editSuccess) {
+          changeStateCallBack(provider);
+        }
       },
       onPanUpdate: (dragUpdateDetails) {
         var position = Offset(dragUpdateDetails.localPosition.dx - 100,

@@ -20,6 +20,16 @@ class CustomAppPageNotifier extends StateNotifier<CustomAppPageState> {
     }).toList();
     state = state.copyWith(toggle: tempList);
   }
+
+  void deleteToggleState({required int index}) {
+    final List<TogglePageState> tempList = state.toggle
+        .asMap()
+        .entries
+        .where((entry) => entry.key != index)
+        .map((entry) => entry.value)
+        .toList();
+    state = state.copyWith(toggle: tempList);
+  }
 }
 
 class CustomAppViewModel {
