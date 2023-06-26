@@ -48,12 +48,10 @@ void main() {
     });
 
     test('トグル削除のテスト', () {
-      // expect(notifier.debugState.toggle.length, 3);
-      // expect(getState().toggle.length, 3);
       final int previousLength = notifier.debugState.toggle.length;
       notifier.deleteToggleState(index: 0);
       expect(notifier.debugState.toggle.length, previousLength - 1);
-      // expect(getState().toggle.length, 1);
+      expect(getState().toggle.length, previousLength - 1);
     });
   });
 }
