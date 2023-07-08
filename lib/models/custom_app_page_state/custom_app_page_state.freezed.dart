@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CustomAppPageState {
   List<TogglePageState> get toggle => throw _privateConstructorUsedError;
+  List<Map<String, dynamic>> get contents => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomAppPageStateCopyWith<CustomAppPageState> get copyWith =>
@@ -29,7 +30,8 @@ abstract class $CustomAppPageStateCopyWith<$Res> {
           CustomAppPageState value, $Res Function(CustomAppPageState) then) =
       _$CustomAppPageStateCopyWithImpl<$Res, CustomAppPageState>;
   @useResult
-  $Res call({List<TogglePageState> toggle});
+  $Res call(
+      {List<TogglePageState> toggle, List<Map<String, dynamic>> contents});
 }
 
 /// @nodoc
@@ -46,12 +48,17 @@ class _$CustomAppPageStateCopyWithImpl<$Res, $Val extends CustomAppPageState>
   @override
   $Res call({
     Object? toggle = null,
+    Object? contents = null,
   }) {
     return _then(_value.copyWith(
       toggle: null == toggle
           ? _value.toggle
           : toggle // ignore: cast_nullable_to_non_nullable
               as List<TogglePageState>,
+      contents: null == contents
+          ? _value.contents
+          : contents // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>,
     ) as $Val);
   }
 }
@@ -64,7 +71,8 @@ abstract class _$$_CustomAppPageStateCopyWith<$Res>
       __$$_CustomAppPageStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<TogglePageState> toggle});
+  $Res call(
+      {List<TogglePageState> toggle, List<Map<String, dynamic>> contents});
 }
 
 /// @nodoc
@@ -79,12 +87,17 @@ class __$$_CustomAppPageStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? toggle = null,
+    Object? contents = null,
   }) {
     return _then(_$_CustomAppPageState(
       toggle: null == toggle
           ? _value._toggle
           : toggle // ignore: cast_nullable_to_non_nullable
               as List<TogglePageState>,
+      contents: null == contents
+          ? _value._contents
+          : contents // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>,
     ));
   }
 }
@@ -96,8 +109,10 @@ class _$_CustomAppPageState implements _CustomAppPageState {
       {final List<TogglePageState> toggle = const [
         TogglePageState(),
         TogglePageState()
-      ]})
-      : _toggle = toggle;
+      ],
+      required final List<Map<String, dynamic>> contents})
+      : _toggle = toggle,
+        _contents = contents;
 
   final List<TogglePageState> _toggle;
   @override
@@ -108,9 +123,17 @@ class _$_CustomAppPageState implements _CustomAppPageState {
     return EqualUnmodifiableListView(_toggle);
   }
 
+  final List<Map<String, dynamic>> _contents;
+  @override
+  List<Map<String, dynamic>> get contents {
+    if (_contents is EqualUnmodifiableListView) return _contents;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_contents);
+  }
+
   @override
   String toString() {
-    return 'CustomAppPageState(toggle: $toggle)';
+    return 'CustomAppPageState(toggle: $toggle, contents: $contents)';
   }
 
   @override
@@ -118,12 +141,15 @@ class _$_CustomAppPageState implements _CustomAppPageState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CustomAppPageState &&
-            const DeepCollectionEquality().equals(other._toggle, _toggle));
+            const DeepCollectionEquality().equals(other._toggle, _toggle) &&
+            const DeepCollectionEquality().equals(other._contents, _contents));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_toggle));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_toggle),
+      const DeepCollectionEquality().hash(_contents));
 
   @JsonKey(ignore: true)
   @override
@@ -134,11 +160,15 @@ class _$_CustomAppPageState implements _CustomAppPageState {
 }
 
 abstract class _CustomAppPageState implements CustomAppPageState {
-  const factory _CustomAppPageState({final List<TogglePageState> toggle}) =
+  const factory _CustomAppPageState(
+          {final List<TogglePageState> toggle,
+          required final List<Map<String, dynamic>> contents}) =
       _$_CustomAppPageState;
 
   @override
   List<TogglePageState> get toggle;
+  @override
+  List<Map<String, dynamic>> get contents;
   @override
   @JsonKey(ignore: true)
   _$$_CustomAppPageStateCopyWith<_$_CustomAppPageState> get copyWith =>

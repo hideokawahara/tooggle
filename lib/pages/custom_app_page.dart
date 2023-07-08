@@ -29,23 +29,21 @@ class CustomAppPage extends StatelessWidget {
         backgroundColor: AppColors.mainAppColor,
         title: const Text('ToogGle'),
       ),
-      endDrawer: CustomAppDrawer(),
+      endDrawer: const CustomAppDrawer(),
       body: const CustomAppPageBody(),
     );
   }
 }
 
 class CustomAppDrawer extends ConsumerWidget {
-  CustomAppDrawer({super.key});
+  const CustomAppDrawer({super.key});
 
-  final Map<String, dynamic> contents = {
-    "トグル": "toggle",
-    "プルトゥリフレッシュ": "pull",
-  };
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final CustomAppPageNotifier customAppPageNotifier =
         ref.watch(CustomAppViewModel.masterCustomAppProvider.notifier);
+    final List<dynamic> contents =
+        ref.watch(CustomAppViewModel.masterCustomAppProvider).contents;
     return Drawer(
       child: Column(
         children: [
@@ -68,9 +66,10 @@ class CustomAppDrawer extends ConsumerWidget {
               padding: EdgeInsets.zero,
               itemCount: contents.length,
               itemBuilder: (BuildContext listContext, int index) {
+                final Map<String, dynamic> content = contents[index];
                 return ListTile(
                   title: Text(
-                    contents.keys.toList()[index],
+                    convertContentTitle(content),
                   ),
                   trailing: AppIcons.copyAddIcon(
                     //TODO: 他に良い色がないか検討する
@@ -87,6 +86,13 @@ class CustomAppDrawer extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  String convertContentTitle(Map<String, dynamic> value) {
+    if (value.containsKey('content_text') && value['content_text'] is String) {
+      return value['content_text'];
+    }
+    return '';
   }
 }
 

@@ -3,13 +3,19 @@ import 'package:tooggle/packages/packages_export.dart';
 
 //Models
 import 'package:tooggle/models/models_export.dart';
+import 'package:tooggle/resources/app_config.dart';
 
 class CustomAppPageNotifier extends StateNotifier<CustomAppPageState> {
   CustomAppPageNotifier()
-      : super(const CustomAppPageState(toggle: [
-          TogglePageState(),
-          TogglePageState(position: Offset(200, 200)),
-        ]));
+      : super(
+          const CustomAppPageState(
+            toggle: [
+              TogglePageState(),
+              TogglePageState(position: Offset(200, 200)),
+            ],
+            contents: AppConfigs.contents,
+          ),
+        );
 
   void changeToggleState({
     required int index,

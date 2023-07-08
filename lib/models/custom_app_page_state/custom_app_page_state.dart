@@ -13,6 +13,7 @@ class CustomAppPageState with _$CustomAppPageState {
       TogglePageState(),
       TogglePageState(),
     ])
-        List<TogglePageState> toggle,
+    List<TogglePageState> toggle,
+    required final List<Map<String, dynamic>> contents,
   }) = _CustomAppPageState;
 }
